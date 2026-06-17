@@ -1,0 +1,32 @@
+name: vitetris
+base: core24
+version: '0.59.1'
+summary: Console based Tetris clone
+description: |
+  vitetris is a terminal-based Tetris clone for Unix-like systems.
+  Features include 2-player mode, network play over TCP/IP or a local
+  socket, joystick support, and both ncurses and ANSI terminal backends.
+
+grade: stable
+confinement: strict
+
+apps:
+  vitetris:
+    command: usr/bin/tetris
+    plugs:
+      - home
+      - network
+      - network-bind
+
+parts:
+  vitetris:
+    plugin: autotools
+    source: .
+    autotools-configure-parameters:
+      - --prefix=/usr
+    build-packages:
+      - libncurses-dev
+      - libx11-dev
+    stage-packages:
+      - libncurses6
+      - libx11-6
